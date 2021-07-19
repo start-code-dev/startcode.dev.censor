@@ -66,6 +66,30 @@ class CensorTest extends TestCase
         $this->assertEquals(['very', 'bad'], $aCensor->getForbiddenMatches());
     }
 
+    public function testCensorFullWords() : void
+    {
+        $aCensor = (new Censor(['bad']))
+            ->setCensorMark('*')
+            ->censor('some very badass string');
+
+        $this->assertTrue($aCensor->isCensoredString());
+
+        $aCensor = (new Censor(['bad']))
+            ->setCensorMark('*')
+            ->censor('some very badass string', true);
+
+        $this->assertFalse($aCensor->isCensoredString());
+    }
+
+    public function testCensorCapital() : void
+    {
+        $aCensor = (new Censor(['bad']))
+            ->setCensorMark('*')
+            ->censor('some very BAD string');
+
+        $this->assertTrue($aCensor->isCensoredString());
+    }
+
     public function testCensorIfNoWordsFound() : void
     {
         $aCensor = (new Censor(['very', 'bad']))
