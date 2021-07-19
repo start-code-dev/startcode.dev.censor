@@ -1,13 +1,11 @@
-value-object
+censor
 ======
-
-> value-object - [php](http://php.net) library
 
 ## Install
 Via Composer
 
 ```sh
-composer require startcode/value-object
+composer require startcode/censor
 ```
 
 ## Usage
